@@ -78,10 +78,10 @@ cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB Client"
 
-STATUS=$(mongosh --host mongodb.harireddy.fun --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+STATUS=$(mongosh --host 172.31.27.144 --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ "${record_count:-0}" -lt 1 ]; 
 then
-    mongosh --host mongodb.harireddy.fun </app/db/master-data.js &>>$LOG_FILE
+    mongosh --host 172.31.27.144 </app/db/master-data.js &>>$LOG_FILE
     VALIDATE $? "Loading data into MongoDB"
 else
     echo -e "Data is already loaded ... $Y SKIPPING $N"
