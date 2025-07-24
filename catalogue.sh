@@ -79,7 +79,7 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB Client"
 
 STATUS=$(mongosh --host mongodb.harireddy.fun --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
-if [ $STATUS lt 0 ]
+if [ "${record_count:-0}" -lt 1 ]; 
 then
     mongosh --host mongodb.harireddy.fun </app/db/master-data.js &>>$LOG_FILE
     VALIDATE $? "Loading data into MongoDB"
